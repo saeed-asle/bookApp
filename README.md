@@ -23,8 +23,8 @@ The application follows a structured multi-threaded approach:
 - Extracts the host and path from the URL.
 - Sends an HTTP GET request using `httplib::Client`.
 - Processes the response:
-  - ✅ **If successful (200 OK)** → Stores raw JSON data.
-  - ❌ **If failed** → Logs an error message.
+  - **If successful (200 OK)** → Stores raw JSON data.
+  - **If failed** → Logs an error message.
 - Signals the parsing thread that new data is available.
 
 <p align="center">
@@ -115,8 +115,8 @@ This application features a sleek **Dear ImGui** interface, styled with a variet
 To get started, clone the repository and navigate into the project directory:
 
 ```sh
-git clone https://github.com/saeed-asle/bookApp.git
-cd bookApp
+  git clone https://github.com/saeed-asle/bookApp.git
+  cd bookApp
 ```
 
 
@@ -156,18 +156,18 @@ If you prefer CMake instead of Visual Studio, follow these steps:
   - Run the following commands inside the project folder:
 
     ```sh
-    mkdir build && cd build
-    cmake ..
-    cmake --build .
-    ./ConnectedApp  # Run the executable (Use "ConnectedApp.exe" on Windows)
+      mkdir build && cd build
+      cmake ..
+      cmake --build .
+      ./ConnectedApp  # Run the executable (Use "ConnectedApp.exe" on Windows)
     ```
 
 - **Ensure `ConnectedApp` is the Default Target**
   - Check that `CMakeLists.txt` sets `ConnectedApp` as the executable:
 
     ```cmake
-    add_executable(ConnectedApp main.cpp)
-    set_target_properties(ConnectedApp PROPERTIES OUTPUT_NAME "ConnectedApp")
+      add_executable(ConnectedApp main.cpp)
+      set_target_properties(ConnectedApp PROPERTIES OUTPUT_NAME "ConnectedApp")
     ```
 
 Now your project should be correctly built and ready to run!
