@@ -99,9 +99,7 @@ This application features a sleek `Dear ImGui` interface,  styled with a variety
 
 ---
 
-## 🔧 How to Build & Run
-
-### 📦 Dependencies
+## 📦 Dependencies
 
 - **C++17 or later** – Required for modern C++ features.  
 - **httplib** – Lightweight HTTP client for making API requests.  
@@ -114,6 +112,9 @@ This application features a sleek `Dear ImGui` interface,  styled with a variety
 - **CMake** – Recommended for building the project across different platforms.  
 - **Multi-threading Support** – Uses `std::thread`, `std::mutex`, and `std::condition_variable`.  
 
+---
+
+## 🔧 How to Build & Run
 
 ### 🏗 Build Instructions
 
