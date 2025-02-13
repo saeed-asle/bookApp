@@ -112,34 +112,61 @@ This application features a sleek **Dear ImGui** interface, styled with a variet
 
 ### 🏗 Build & Run Instructions
 
-#### 🔹 Using Visual Studio (Recommended)
-1. Open **CppApp.sln** in **Visual Studio**.
-2. Select the desired **build configuration** (Debug/Release).
-3. Click **Build** → **Build Solution (Ctrl + Shift + B)**.
-4. Run the application by pressing **F5** or selecting **Debug → Start Debugging**.
+#### 🔄 Cloning the Repository
+
+1. Open a terminal or command prompt.
+2. Run the following command to clone the repository:
+   
+   ```sh
+   git clone https://github.com/saeed-asle/bookApp.git
+   ```
+3. Navigate into the project directory:
+   
+   ```sh
+   cd bookApp
+   ```
+
+### 🔹 Using Visual Studio (Recommended)
+- Open **CppApp.sln** in **Visual Studio**.
+- Select the desired **build configuration**:
+   - **Debug** (for development with debugging features).
+   - **Release** (for optimized performance).
+- Click **Build** → **Build Solution (Ctrl + Shift + B)**.
+- Run the application:
+   - Press **F5** to start debugging.
+   - Select **Debug → Start Debugging**.
 
 ### ⚙️ Setting ConnectedApp as the Main Project
-
-To ensure the project runs correctly, you need to set **ConnectedApp** as your main project. Follow these steps based on your setup:
+To ensure the project runs correctly, set **ConnectedApp** as the main project.
 
 - **In Visual Studio:**
   - Open your solution in Visual Studio.
-  - Locate the **Solution Explorer** panel (`Ctrl + Alt + L` if not visible).
+  - Locate **Solution Explorer** (`Ctrl + Alt + L` if not visible).
   - Right-click on **ConnectedApp**.
   - Select **"Set as Startup Project"**.
-  - The project name should now appear in **bold**, indicating it is the main project.
-
+  - The project name should now appear **bold**, indicating it is set as the main project.
 
 - **Using CMake:**
-  - Ensure **ConnectedApp** is set as the default target in your `CMakeLists.txt`.
+  - Ensure **ConnectedApp** is the default target in `CMakeLists.txt`:
+    
+    ```cmake
+    add_executable(ConnectedApp main.cpp)
+    set_target_properties(ConnectedApp PROPERTIES OUTPUT_NAME "ConnectedApp")
+    ```
 
-#### 🔹 Using CMake (Alternative)
+### 🔹 Using CMake (Alternative)
+#### 📌 Prerequisites
+Ensure you have **CMake**, **Make (Linux/macOS)**, and a **compiler (GCC/Clang/MSVC)** installed.
+
+#### 💻 Build & Run
 ```sh
 mkdir build && cd build
 cmake ..
-make
+make  # Use "cmake --build ." on Windows
 ./ConnectedApp
 ```
+
+
 
 
 ---
