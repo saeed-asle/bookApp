@@ -10,7 +10,7 @@
 
 using namespace std::chrono_literals;
 
-// Data
+// DirectX Globals
 static ID3D11Device* g_pd3dDevice = nullptr;
 static ID3D11DeviceContext* g_pd3dDeviceContext = nullptr;
 static IDXGISwapChain* g_pSwapChain = nullptr;
@@ -23,6 +23,7 @@ void CreateRenderTarget();
 void CleanupRenderTarget();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
+
 int GuiMain(drawcallback drawfunction, void* obj_ptr)
 {
     WNDCLASSEXW wc = { sizeof(wc), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(nullptr), nullptr, nullptr, nullptr, nullptr, L"ImGui Window", nullptr };
@@ -30,8 +31,8 @@ int GuiMain(drawcallback drawfunction, void* obj_ptr)
 
     HWND hwnd = ::CreateWindowW(
         wc.lpszClassName,
-        L"ImGui DirectX11",
-        WS_POPUP,  // Removes window borders and title bar
+        L"ImGui Book APP",
+        WS_OVERLAPPEDWINDOW,
         100, 100, 1280, 800,
         nullptr, nullptr, wc.hInstance, nullptr
     );
@@ -49,7 +50,8 @@ int GuiMain(drawcallback drawfunction, void* obj_ptr)
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
-    ImGui::StyleColorsDark();
+
+
     ImGui_ImplWin32_Init(hwnd);
     ImGui_ImplDX11_Init(g_pd3dDevice, g_pd3dDeviceContext);
 
@@ -81,9 +83,11 @@ int GuiMain(drawcallback drawfunction, void* obj_ptr)
         drawfunction(obj_ptr);
 
         ImGui::Render();
-        const float clear_color_with_alpha[4] = { 0.45f, 0.55f, 0.60f, 1.00f };  // Regular solid color background
+
+        const float clear_color_with_alpha[4] = { 0.10f, 0.10f, 0.10f, 1.00f };
         g_pd3dDeviceContext->OMSetRenderTargets(1, &g_mainRenderTargetView, nullptr);
         g_pd3dDeviceContext->ClearRenderTargetView(g_mainRenderTargetView, clear_color_with_alpha);
+
         ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
         g_pSwapChain->Present(1, 0);

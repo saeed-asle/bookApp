@@ -89,6 +89,6 @@ struct CommonObjects {
     BookAPIResult book_details;
     std::mutex data_mutex;
     std::condition_variable cv;
-    std::string error_message; // Add this field
+    std::string error_message; 
 
 };

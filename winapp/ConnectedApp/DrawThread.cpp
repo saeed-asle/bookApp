@@ -27,11 +27,17 @@ void ApplyModernTheme() {
     ImGuiStyle& style = ImGui::GetStyle();
 
     // General UI Colors
-    style.Colors[ImGuiCol_WindowBg] = ImVec4(0.15f, 0.15f, 0.18f, 1.0f);
-    style.Colors[ImGuiCol_Border] = ImVec4(0.3f, 0.3f, 0.4f, 0.5f);
-    style.Colors[ImGuiCol_FrameBg] = ImVec4(0.2f, 0.22f, 0.27f, 1.0f);
-    style.Colors[ImGuiCol_FrameBgHovered] = ImVec4(0.3f, 0.35f, 0.4f, 1.0f);
-    style.Colors[ImGuiCol_FrameBgActive] = ImVec4(0.35f, 0.4f, 0.45f, 1.0f);
+    // Change window background to a darker shade
+    style.Colors[ImGuiCol_WindowBg] = ImVec4(0.12f, 0.12f, 0.14f, 1.0f);  // Dark background for the entire UI blocks
+
+    // Border color for windows and panels
+    style.Colors[ImGuiCol_Border] = ImVec4(0.3f, 0.3f, 0.35f, 1.0f);
+
+    // Frame (input fields, buttons) background color
+    style.Colors[ImGuiCol_FrameBg] = ImVec4(0.18f, 0.18f, 0.22f, 1.0f);  // Darker background for input fields
+    style.Colors[ImGuiCol_FrameBgHovered] = ImVec4(0.25f, 0.25f, 0.3f, 1.0f);  // Lighter on hover
+    style.Colors[ImGuiCol_FrameBgActive] = ImVec4(0.3f, 0.3f, 0.35f, 1.0f);  // Darker when active
+
 
     // Buttons
     style.Colors[ImGuiCol_Button] = ImVec4(0.25f, 0.47f, 0.75f, 1.0f);
@@ -55,12 +61,14 @@ void ApplyModernTheme() {
     style.ScrollbarSize = 14.0f;
     style.FramePadding = ImVec2(10, 6);
     style.WindowPadding = ImVec2(14, 14);
+    //ImGui::GetIO().FontGlobalScale = 1.5f;  // Increase text size
+
 }
 void ApplyModernTheme1() {
     ImGuiStyle& style = ImGui::GetStyle();
 
     // Set general colors
-    ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.10f, 0.10f, 0.10f, 1.0f));
+    ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.15f, 0.10f, 0.15f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0.3f, 0.3f, 0.3f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(0.18f, 0.18f, 0.18f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, ImVec4(0.28f, 0.28f, 0.28f, 1.0f));
@@ -79,6 +87,7 @@ void ApplyModernTheme1() {
     style.GrabRounding = 4.0f;
     style.PopupRounding = 6.0f;
     style.ScrollbarRounding = 8.0f;
+
 }
 
 void DrawAppWindow(void* common_ptr) {
@@ -139,9 +148,10 @@ void DrawAppWindow(void* common_ptr) {
     if (input_mode == 4) {
         ImGui::SliderInt("Limit Results##limit", &limit, 1, 100);
         ImGui::InputText("Kind##kind", kind_option, sizeof(kind_option));
-        ImGui::Checkbox("Filter by Bots", &bot_filter);
         //ImGui::SliderInt("Offset##offset", &offset, 0, 10000);
         ImGui::InputText("Date##date", date_buffer, sizeof(date_buffer));
+        ImGui::Checkbox("Filter by Bots", &bot_filter);
+
     }
     ImGui::EndChild();
 
@@ -202,27 +212,38 @@ void DrawAppWindow(void* common_ptr) {
     ImGui::PopStyleColor(5);
     ImGui::PopStyleVar(2);
     if (common->start_download && !common->json_ready) {
-        ImVec2 window_pos = ImGui::GetWindowPos();
-        ImVec2 window_size = ImGui::GetWindowSize();
-        ImVec2 center = ImVec2(window_pos.x + window_size.x * 0.5f, window_pos.y + window_size.y * 0.5f);
+        ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f), ImGuiCond_Always);
+        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y), ImGuiCond_Always);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+        ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.0f, 0.0f, 0.0f, 0.3f));  // Transparent black background
 
-        ImGui::SetCursorPos(ImVec2(window_size.x * 0.5f - 10, window_size.y * 0.5f - 10));
-        ImGui::Text("Loading...");
+        if (ImGui::Begin("Loading", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove)) {
+            ImVec2 window_pos = ImGui::GetWindowPos();
+            ImVec2 window_size = ImGui::GetWindowSize();
+            ImVec2 center = ImVec2(window_pos.x + window_size.x * 0.5f, window_pos.y + window_size.y * 0.5f);
 
-        static float rotation = 0.0f;
-        rotation += ImGui::GetIO().DeltaTime * 5.0f;
-        if (rotation > IM_PI * 2.0f) rotation -= IM_PI * 2.0f;
+            ImGui::SetCursorPos(ImVec2(window_size.x * 0.5f - 10, window_size.y * 0.5f - 10));
+            /*ImGui::Text("Loading...");*/
 
-        ImDrawList* draw_list = ImGui::GetWindowDrawList();
-        const int num_segments = 12;
-        const float radius = 10.0f;
-        const float angle_step = IM_PI * 2.0f / num_segments;
-        for (int i = 0; i < num_segments; i++) {
-            float angle = rotation + angle_step * i;
-            float alpha = (float)i / num_segments;
-            ImVec2 circle_pos = ImVec2(center.x + cos(angle) * radius, center.y + sin(angle) * radius);
-            draw_list->AddCircleFilled(circle_pos, 3.0f, IM_COL32(255, 255, 255, (int)(alpha * 255)));
+            static float rotation = 0.0f;
+            rotation += ImGui::GetIO().DeltaTime * 5.0f;
+            if (rotation > IM_PI * 2.0f) rotation -= IM_PI * 2.0f;
+
+            ImDrawList* draw_list = ImGui::GetWindowDrawList();
+            const int num_segments = 15;
+            const float radius = 15.0f;
+            const float angle_step = IM_PI * 2.0f / num_segments;
+            for (int i = 0; i < num_segments; i++) {
+                float angle = rotation + angle_step * i;
+                float alpha = (float)i / num_segments;
+                ImVec2 circle_pos = ImVec2(center.x + cos(angle) * radius, center.y + sin(angle) * radius);
+                draw_list->AddCircleFilled(circle_pos, 3.0f, IM_COL32(255, 255, 255, (int)(alpha * 255)));
+            }
+            ImGui::End();
         }
+
+        ImGui::PopStyleColor();
+        ImGui::PopStyleVar();
     }
     if (!common->error_message.empty()) {
         ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0.3f, 0.0f, 0.0f, 1.0f));  // Dark red background
@@ -230,7 +251,7 @@ void DrawAppWindow(void* common_ptr) {
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.6f, 0.6f, 1.0f));  // Light red text
 
         ImGui::BeginChild("ErrorAlert", ImVec2(0, 50), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
-        ImGui::TextWrapped("⚠️ Error: %s", common->error_message.c_str());
+        ImGui::TextWrapped("[!] Error: %s", common->error_message.c_str());
         ImGui::EndChild();
 
         ImGui::PopStyleColor(3);  
@@ -238,7 +259,7 @@ void DrawAppWindow(void* common_ptr) {
     if (common->json_ready && common->error_message.empty()) {
         ApplyModernTheme1();
         ApplyModernTheme();
-        ImGui::BeginChild("Results", ImVec2(600, 450), true, ImGuiWindowFlags_AlwaysUseWindowPadding);
+        ImGui::BeginChild("Results", ImVec2(800, 450), true, ImGuiWindowFlags_AlwaysUseWindowPadding);
 
         ImGui::TextColored(ImVec4(0.9f, 0.7f, 0.4f, 1.0f), "Search Results:");
         ImGui::Separator();
@@ -246,8 +267,12 @@ void DrawAppWindow(void* common_ptr) {
         if (common->query_type == "search") {
             for (size_t i = 0; i < common->search_results.size(); i++) {
                 ImGui::PushID(static_cast<int>(i));
+                ImGui::PushTextWrapPos(0.0f);  
+
                 ImGui::TextColored(ImVec4(0.3f, 0.8f, 1.0f, 1.0f), "Title: %s", common->search_results[i].title.c_str());
-                ImGui::Text("Author: %s", common->search_results[i].author.c_str());
+                ImGui::TextWrapped("Author: %s", common->search_results[i].author.c_str());
+
+                ImGui::PopTextWrapPos(); 
                 ImGui::Separator();
                 ImGui::PopID();
             }
