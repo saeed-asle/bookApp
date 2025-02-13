@@ -108,25 +108,26 @@ This application features a sleek **Dear ImGui** interface, styled with a variet
 
 ---
 
-## 🔧 How to Build & Run
+## 📚 How to Build & Run
 
 ### 🏗 Build & Run Instructions
 
 #### 🔄 Cloning the Repository
 
-1. Open a terminal or command prompt.
-2. Run the following command to clone the repository:
+- Open a terminal or command prompt.
+- Run the following command to clone the repository:
    
    ```sh
    git clone https://github.com/saeed-asle/bookApp.git
    ```
-3. Navigate into the project directory:
+- Navigate into the project directory:
    
    ```sh
    cd bookApp
    ```
 
 ### 🔹 Using Visual Studio (Recommended)
+
 - Open **CppApp.sln** in **Visual Studio**.
 - Select the desired **build configuration**:
    - **Debug** (for development with debugging features).
@@ -137,6 +138,7 @@ This application features a sleek **Dear ImGui** interface, styled with a variet
    - Select **Debug → Start Debugging**.
 
 ### ⚙️ Setting ConnectedApp as the Main Project
+
 To ensure the project runs correctly, set **ConnectedApp** as the main project.
 
 - **In Visual Studio:**
@@ -155,21 +157,18 @@ To ensure the project runs correctly, set **ConnectedApp** as the main project.
     ```
 
 ### 🔹 Using CMake (Alternative)
-#### 📌 Prerequisites
-Ensure you have **CMake**, **Make (Linux/macOS)**, and a **compiler (GCC/Clang/MSVC)** installed.
 
-#### 💻 Build & Run
-```sh
-mkdir build && cd build
-cmake ..
-make  # Use "cmake --build ." on Windows
-./ConnectedApp
-```
+- **Prerequisites:**
+  - Ensure you have **CMake**, **Make (Linux/macOS)**, and a **compiler (GCC/Clang/MSVC)** installed.
 
-
-
-
----
+- **Build & Run:**
+   
+    ```sh
+    mkdir build && cd build
+    cmake ..
+    make  # Use "cmake --build ." on Windows
+    ./ConnectedApp
+    ```
 
 ## 📜 License
 
@@ -189,4 +188,6 @@ MIT License - Feel free to use and modify!
 </p>
 
 ---
+
+
 
