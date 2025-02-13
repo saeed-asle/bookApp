@@ -13,7 +13,7 @@ A modern, multi-threaded C++ application that fetches book data from the [Open L
 
 The application follows a structured multi-threaded approach:
 
-### 🌐 Download Thread (Data Retrieval)
+### 1. Download Thread (Data Retrieval)
 **Purpose:** Fetches JSON data asynchronously from the Open Library API.
 
 #### 🔄 How It Works:
@@ -29,7 +29,7 @@ The application follows a structured multi-threaded approach:
   <img src="Captures/4.png" width="95%" />
 </p>
 
-### ⚙️ Parse Thread (JSON Processing)
+### 2. Parse Thread (JSON Processing)
 **Purpose:** Extracts meaningful information from JSON responses and structures them for UI presentation.
 
 #### 🔄 How It Works:
@@ -43,7 +43,7 @@ The application follows a structured multi-threaded approach:
 
 ---
 
-### 🎨 UI Thread (Modern GUI Rendering)
+### 3. UI Thread (Modern GUI Rendering)
 **Purpose:** Updates and manages the interactive graphical user interface (GUI).
 
 #### 🔄 How It Works:
