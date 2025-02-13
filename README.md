@@ -178,8 +178,8 @@ Now your project should be correctly built and ready to run!
 
 
 ## ⚡ Author
-### &nbsp;&nbsp;&nbsp;**Saeed Asle**  
-> ### &nbsp;&nbsp;&nbsp;*[🔗 LinkedIn](https://www.linkedin.com/in/saidasla/)*
+  &nbsp;&nbsp;&nbsp;**Saeed Asle**  
+  > &nbsp;&nbsp;*[🔗LinkedIn](https://www.linkedin.com/in/saidasla/)*
 
 ---
 
