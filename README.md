@@ -169,6 +169,13 @@ To ensure the project runs correctly, set **ConnectedApp** as the main project.
     make  # Use "cmake --build ." on Windows
     ./ConnectedApp
     ```
+---
+
+## ⚡ Author
+### &nbsp;&nbsp;&nbsp;**Saeed Asle**  
+> ### &nbsp;&nbsp;&nbsp;*[🔗 LinkedIn](https://www.linkedin.com/in/saidasla/)*
+
+---
 
 ## 📜 License
 
@@ -176,12 +183,6 @@ MIT License - Feel free to use and modify!
 
 ---
 
-## ⚡ Author
-### **Saeed Asle** 
-
-### *[🔗 LinkedIn](https://www.linkedin.com/in/saidasla/)*
-
----
 
 <p align="center">
   <img src="Captures/2.png" width="95%" />
