@@ -169,13 +169,8 @@ If you prefer CMake instead of Visual Studio, follow these steps:
       add_executable(ConnectedApp main.cpp)
       set_target_properties(ConnectedApp PROPERTIES OUTPUT_NAME "ConnectedApp")
     ```
-
-Now your project should be correctly built and ready to run!
-
+    
 ---
-
-
-
 
 ## ⚡ Author
   &nbsp;&nbsp;&nbsp;**Saeed Asle**  
