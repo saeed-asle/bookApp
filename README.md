@@ -120,7 +120,7 @@ To get started, clone the repository and navigate into the project directory:
 ```
 
 
-### 2. Build & Run Using Visual Studio (Recommended)
+### 2. Using Visual Studio (Recommended)
 
 - **Opening the Project**
   - Open **CppApp.sln** in **Visual Studio**.
@@ -140,7 +140,7 @@ To get started, clone the repository and navigate into the project directory:
     - Press **F5** to start debugging.
     - Or select **Debug → Start Debugging**.
 
-### 3. Build & Run Using CMake (Alternative)
+### 3. Using CMake (Alternative)
 
 If you prefer CMake instead of Visual Studio, follow these steps:
 
