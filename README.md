@@ -1,5 +1,9 @@
 # 📚 Modern Book Manager
 
+  <p align="center">
+    <img src="Captures/1.png" width="95%" />
+  </p>
+
 ## Overview
 A modern, multi-threaded C++ application that fetches book data from the [Open Library API](https://openlibrary.org/developers/api), processes it, and dynamically updates a sleek graphical user interface (GUI). Designed for efficiency and responsiveness, this app ensures smooth real-time data retrieval, parsing, and display.
 
@@ -21,8 +25,11 @@ The application follows a structured multi-threaded approach:
   - ✅ **If successful (200 OK)** → Stores raw JSON data.
   - ❌ **If failed** → Logs an error message.
 - Signals the parsing thread that new data is available.
-
 ---
+
+<p align="center">
+  <img src="Captures/4.png" width="95%" />
+</p>
 
 ### ⚙️ Parse Thread (JSON Processing)
 
@@ -51,6 +58,10 @@ The application follows a structured multi-threaded approach:
   - 📖 **Result navigation**
   - 📊 **Data visualization**
 - Allows users to initiate new searches, triggering another download cycle.
+  
+<p align="center">
+  <img src="Captures/3.png" width="95%" />
+</p>
 
 ---
 
@@ -73,7 +84,7 @@ This application features a sleek `Dear ImGui` interface,  styled with a variety
 - **Custom Loading Animations** → Circular progress indicators using `ImDrawList`
 - **Error Alerts** → Themed warning boxes for clear debugging feedback
 
-👉 UI styling is applied through `ApplyModernTheme` and `ApplyModernTheme1` inside `DrawAppWindow`.
+👉 UI styling is applied through `ApplyModernTheme` and `ApplyModernTheme1` inside `DrawAppWindow` with other parts.
 
 ---
 
@@ -133,3 +144,8 @@ MIT License - Feel free to use and modify!
 ## ⚡ Author
 Saeed Asle | 🌍 Open Library API Integration | 🎨 ImGui Modern UI
 
+---
+
+<p align="center">
+  <img src="Captures/2.png" width="95%" />
+</p>
