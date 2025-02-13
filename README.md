@@ -18,7 +18,7 @@ The application follows a structured multi-threaded approach:
 ### 1. Download Thread (Data Retrieval)
 **Purpose:** Fetches JSON data asynchronously from the Open Library API.
 
-#### 🔄 How It Works:
+ 🔄 How It Works:
 - Waits for a download request.
 - Extracts the host and path from the URL.
 - Sends an HTTP GET request using `httplib::Client`.
@@ -34,7 +34,7 @@ The application follows a structured multi-threaded approach:
 ### 2. Parse Thread (JSON Processing)
 **Purpose:** Extracts meaningful information from JSON responses and structures them for UI presentation.
 
-#### 🔄 How It Works:
+🔄 How It Works:
 - Waits for the `data_ready` signal from the download thread.
 - Validates the downloaded data.
 - Uses `nlohmann::json` to parse JSON.
@@ -43,12 +43,10 @@ The application follows a structured multi-threaded approach:
 - Stores structured data in shared memory (`CommonObjects`).
 - Notifies the UI thread that new data is available.
 
----
-
 ### 3. UI Thread (Modern GUI Rendering)
 **Purpose:** Updates and manages the interactive graphical user interface (GUI).
 
-#### 🔄 How It Works:
+🔄 How It Works:
 - Waits for the `json_ready` signal from the parse thread.
 - Dynamically updates UI components with the latest parsed data.
 - Implements interactive features such as:
