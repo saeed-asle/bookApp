@@ -1,7 +1,7 @@
 # 📚 Modern Book Manager
 
 <p align="center">
-  <img src="Captures/1.png" width="95%" />
+  <img src="Captures/1.png" width="100%" />
 </p>
 
 ---
@@ -186,7 +186,7 @@ MIT License - Feel free to use and modify!
 
 
 <p align="center">
-  <img src="Captures/2.png" width="95%" />
+  <img src="Captures/1 (4).png" width="100%" />
 </p>
 
 ---
