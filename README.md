@@ -144,7 +144,7 @@ cd bookApp
 
 If you prefer CMake instead of Visual Studio, follow these steps:
 
-- **Prerequisites:**
+- **Prerequisites**
   - Install **CMake**: [Download CMake](https://cmake.org/download/)
   - Install a **C++ Compiler**:
     - **Windows**: Install **MSVC** (comes with Visual Studio) or **MinGW-w64**.
@@ -152,7 +152,7 @@ If you prefer CMake instead of Visual Studio, follow these steps:
     - **macOS**: Install **Clang** (`xcode-select --install`).
   - **(Windows users only)** Install **Ninja** or use `cmake --build .` instead of `make`.
 
-- **Build & Run:**
+- **Build & Run**
   - Run the following commands inside the project folder:
 
     ```sh
