@@ -104,7 +104,6 @@ This application features a sleek **Dear ImGui** interface, styled with a variet
 - **Dear ImGui** – Fast and modern GUI framework for rendering the interface.  
 - **DirectX 11** – Used for rendering the UI on Windows (`imgui_impl_dx11.h`).  
 - **Win32 API** – Required for window management (`imgui_impl_win32.h`).  
-- **CMake** – Recommended for building the project across different platforms.  
 - **Multi-threading Support** – Uses `std::thread`, `std::mutex`, and `std::condition_variable`.  
 
 ---
