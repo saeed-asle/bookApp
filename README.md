@@ -110,66 +110,72 @@ This application features a sleek **Dear ImGui** interface, styled with a variet
 
 ## 📚 How to Build & Run
 
-### 🏗 Build & Run Instructions
+### 1. Clone the Repository
 
-#### 🔄 Cloning the Repository
+To get started, clone the repository and navigate into the project directory:
 
-- Open a terminal or command prompt.
-- Run the following command to clone the repository:
-   
-   ```sh
-   git clone https://github.com/saeed-asle/bookApp.git
-   ```
-- Navigate into the project directory:
-   
-   ```sh
-   cd bookApp
-   ```
+```sh
+git clone https://github.com/saeed-asle/bookApp.git
+cd bookApp
+```
 
-### 🔹 Using Visual Studio (Recommended)
 
-- Open **CppApp.sln** in **Visual Studio**.
-- Select the desired **build configuration**:
-   - **Debug** (for development with debugging features).
-   - **Release** (for optimized performance).
-- Click **Build** → **Build Solution (Ctrl + Shift + B)**.
-- Run the application:
-   - Press **F5** to start debugging.
-   - Select **Debug → Start Debugging**.
+### 2. Build & Run Using Visual Studio (Recommended)
 
-### ⚙️ Setting ConnectedApp as the Main Project
-
-To ensure the project runs correctly, set **ConnectedApp** as the main project.
-
-- **In Visual Studio:**
-  - Open your solution in Visual Studio.
+- **Opening the Project**
+  - Open **CppApp.sln** in **Visual Studio**.
   - Locate **Solution Explorer** (`Ctrl + Alt + L` if not visible).
-  - Right-click on **ConnectedApp**.
-  - Select **"Set as Startup Project"**.
-  - The project name should now appear **bold**, indicating it is set as the main project.
 
-- **Using CMake:**
-  - Ensure **ConnectedApp** is the default target in `CMakeLists.txt`:
-    
+- **Set `ConnectedApp` as the Main Project**
+  - To ensure the correct project runs:
+    - Right-click on **ConnectedApp** in Solution Explorer.
+    - Select **"Set as Startup Project"** (it should appear **bold** once set).
+
+- **Build and Run**
+  - Choose a **build configuration**:
+    - **Debug** (for development with debugging features).
+    - **Release** (for optimized performance).
+  - Click **Build** → **Build Solution (Ctrl + Shift + B)**.
+  - Run the application:
+    - Press **F5** to start debugging.
+    - Or select **Debug → Start Debugging**.
+
+### 3. Build & Run Using CMake (Alternative)
+
+If you prefer CMake instead of Visual Studio, follow these steps:
+
+- **Prerequisites:**
+  - Install **CMake**: [Download CMake](https://cmake.org/download/)
+  - Install a **C++ Compiler**:
+    - **Windows**: Install **MSVC** (comes with Visual Studio) or **MinGW-w64**.
+    - **Linux**: Install **GCC** (`sudo apt install build-essential`).
+    - **macOS**: Install **Clang** (`xcode-select --install`).
+  - **(Windows users only)** Install **Ninja** or use `cmake --build .` instead of `make`.
+
+- **Build & Run:**
+  - Run the following commands inside the project folder:
+
+    ```sh
+    mkdir build && cd build
+    cmake ..
+    cmake --build .
+    ./ConnectedApp  # Run the executable (Use "ConnectedApp.exe" on Windows)
+    ```
+
+- **Ensure `ConnectedApp` is the Default Target**
+  - Check that `CMakeLists.txt` sets `ConnectedApp` as the executable:
+
     ```cmake
     add_executable(ConnectedApp main.cpp)
     set_target_properties(ConnectedApp PROPERTIES OUTPUT_NAME "ConnectedApp")
     ```
 
-### 🔹 Using CMake (Alternative)
+Now your project should be correctly built and ready to run!
 
-- **Prerequisites:**
-  - Ensure you have **CMake**, **Make (Linux/macOS)**, and a **compiler (GCC/Clang/MSVC)** installed.
-
-- **Build & Run:**
-   
-    ```sh
-    mkdir build && cd build
-    cmake ..
-    make  # Use "cmake --build ." on Windows
-    ./ConnectedApp
-    ```
 ---
+
+
+
 
 ## ⚡ Author
 ### &nbsp;&nbsp;&nbsp;**Saeed Asle**  
