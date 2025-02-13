@@ -123,12 +123,27 @@ This application features a sleek `Dear ImGui` interface,  styled with a variety
 3. Click **Build** → **Build Solution (Ctrl + Shift + B)**.
 4. Run the application by pressing **F5** or selecting **Debug → Start Debugging**.
 
+### ⚙️ Setting ConnectedApp as the Main Project
+
+To ensure the project runs correctly, you need to set **ConnectedApp** as your main project. Follow these steps based on your setup:
+
+- **In Visual Studio:**
+  - Open your solution in Visual Studio.
+  - Locate the **Solution Explorer** panel (`Ctrl + Alt + L` if not visible).
+  - Right-click on **ConnectedApp**.
+  - Select **"Set as Startup Project"**.
+  - The project name should now appear in **bold**, indicating it is the main project.
+
+- **Using CMake:**
+  - Ensure **ConnectedApp** is set as the default target in your `CMakeLists.txt`.
+
 #### 🔹 Using CMake (Alternative)
 ```sh
 mkdir build && cd build
 cmake ..
 make
-./BookManager
+./ConnectedApp  # Ensure this matches your actual executable name
+
 
 ```
 
