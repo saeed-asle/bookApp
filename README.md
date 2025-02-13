@@ -4,6 +4,8 @@
   <img src="Captures/1.png" width="95%" />
 </p>
 
+---
+
 ## 📖 Overview
 A modern, multi-threaded C++ application that fetches book data from the [Open Library API](https://openlibrary.org/developers/api), processes it, and dynamically updates a sleek graphical user interface (GUI). Designed for efficiency and responsiveness, this app ensures smooth real-time data retrieval, parsing, and display.
 
