@@ -1,29 +1,23 @@
-# Windows Installer files
 *.cab
 *.msi
 *.msm
 *.msp
 
-# Debugging Files
 *.pdb
 *.user
 *.vspscc
 
-# User-specific files
 *.suo
 *.userosscache
 *.suo
 
-# Build results
 [Bb]in/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleasePublic/
 
-# VS for Mac
 .vs2017/
 .vscode/
 
-# Ignore Visual Studio specific files
 .vs/
