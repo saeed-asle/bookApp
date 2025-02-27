@@ -250,7 +250,6 @@ set_target_properties(ConnectedApp PROPERTIES OUTPUT_NAME "ConnectedApp")</code>
   <p align="center">
     <img src="Captures/1 (4).png" width="100%" />
   </p>
-    <hr>
 <hr>
 
 </body>
