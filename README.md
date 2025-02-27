@@ -1,192 +1,257 @@
-# 📚 Modern Book Manager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1>📚 Modern Book Manager</h1>
+  
+  <p align="center">
+    <img src="Captures/1.png" width="100%" />
+  </p>
+  
+  <hr>
+  
+  <h2>📖 Overview</h2>
+  <p>A modern, multi-threaded C++ application that fetches book data from the <a href="https://openlibrary.org/developers/api">Open Library API</a>, processes it, and dynamically updates a sleek graphical user interface (GUI). Designed for efficiency and responsiveness, this app ensures smooth real-time data retrieval, parsing, and display.</p>
+  
+  <hr>
+  
+  <h2>🏗 System Architecture</h2>
+  
+  <p>The application follows a structured multi-threaded approach:</p>
+  
+  <h3>1. Download Thread (Data Retrieval)</h3>
+  <p><strong>Purpose:</strong> Fetches JSON data asynchronously from the Open Library API.</p>
+  
+  <p><strong>🔄 How It Works:</strong></p>
+  <ul>
+    <li>Waits for a download request.</li>
+    <li>Extracts the host and path from the URL.</li>
+    <li>Sends an HTTP GET request using <code>httplib::Client</code>.</li>
+    <li>Processes the response:
+      <ul>
+        <li><strong>If successful (200 OK)</strong> → Stores raw JSON data.</li>
+        <li><strong>If failed</strong> → Logs an error message.</li>
+      </ul>
+    </li>
+    <li>Signals the parsing thread that new data is available.</li>
+  </ul>
+  
+  <p align="center">
+    <img src="Captures/4.png" width="95%" />
+  </p>
+  
+  <h3>2. Parse Thread (JSON Processing)</h3>
+  <p><strong>Purpose:</strong> Extracts meaningful information from JSON responses and structures them for UI presentation.</p>
+  
+  <p><strong>🔄 How It Works:</strong></p>
+  <ul>
+    <li>Waits for the <code>data_ready</code> signal from the download thread.</li>
+    <li>Validates the downloaded data.</li>
+    <li>Uses <code>nlohmann::json</code> to parse JSON.</li>
+    <li>Extracts relevant details based on <code>query_type</code> (e.g., books, authors, recent changes).</li>
+    <li>Handles missing/optional fields gracefully.</li>
+    <li>Stores structured data in shared memory (<code>CommonObjects</code>).</li>
+    <li>Notifies the UI thread that new data is available.</li>
+  </ul>
+  
+  <h3>3. UI Thread (Modern GUI Rendering)</h3>
+  <p><strong>Purpose:</strong> Updates and manages the interactive graphical user interface (GUI).</p>
+  
+  <p><strong>🔄 How It Works:</strong></p>
+  <ul>
+    <li>Waits for the <code>json_ready</code> signal from the parse thread.</li>
+    <li>Dynamically updates UI components with the latest parsed data.</li>
+    <li>Implements interactive features such as:
+      <ul>
+        <li><strong>Search input</strong></li>
+        <li><strong>Result navigation</strong></li>
+        <li><strong>Data visualization</strong></li>
+      </ul>
+    </li>
+    <li>Allows users to initiate new searches, triggering another download cycle.</li>
+  </ul>
+  
+  <p align="center">
+    <img src="Captures/3.png" width="95%" />
+  </p>
+  
+  <hr>
+  
+  <h2>🚀 Execution Flow (Main Loop)</h2>
+  <ul>
+    <li>Initializes shared data structures (<code>CommonObjects</code>).</li>
+    <li>Spawns and manages worker threads (<code>DownloadThread</code>, <code>ParseThread</code>, <code>DrawThread</code>).</li>
+    <li>Waits for user input and signals appropriate threads.</li>
+    <li>Handles application shutdown gracefully, ensuring safe thread termination.</li>
+  </ul>
+    <hr>
+    <h1>🎨 Modern UI Design</h1>
 
-<p align="center">
-  <img src="Captures/1.png" width="100%" />
-</p>
+  <p>This application features a sleek <strong>Dear ImGui</strong> interface, styled with a variety of elements, including:</p>
+  
+  <ul>
+    <li><strong>Smooth Rounded Corners</strong> → <code>WindowRounding</code>, <code>FrameRounding</code></li>
+    <li><strong>Dark Backgrounds & Highlights</strong> → <code>ImGuiCol_WindowBg</code>, <code>ImGuiCol_ButtonHovered</code>, <code>ImGuiCol_ButtonActive</code></li>
+    <li><strong>Consistent Spacing & Padding</strong> → <code>ItemSpacing</code>, <code>FramePadding</code></li>
+    <li><strong>Custom Loading Animations</strong> → Circular progress indicators using <code>ImDrawList</code></li>
+    <li><strong>Error Alerts</strong> → Themed warning boxes for clear debugging feedback</li>
+  </ul>
+  
+  <p>👉 The main UI styling is applied through <code>ApplyModernTheme</code> and <code>ApplyModernTheme1</code> inside <code>DrawAppWindow</code>.</p>
 
----
+  <hr>
 
-## 📖 Overview
-A modern, multi-threaded C++ application that fetches book data from the [Open Library API](https://openlibrary.org/developers/api), processes it, and dynamically updates a sleek graphical user interface (GUI). Designed for efficiency and responsiveness, this app ensures smooth real-time data retrieval, parsing, and display.
+  <h2>🛠 Core Technologies</h2>
+  <ul>
+    <li><strong>C++17/20</strong> → Efficient multi-threading & modern programming paradigms</li>
+    <li><strong>Open Library API</strong> → Reliable book database for fetching book & author details</li>
+    <li><strong>httplib</strong> → Lightweight, dependency-free HTTP client</li>
+    <li><strong>nlohmann::json</strong> → Easy-to-use JSON parser</li>
+    <li><strong>Dear ImGui</strong> → Fast & modern GUI framework</li>
+    <li><strong>std::thread, std::mutex, std::condition_variable</strong> → Robust multi-threading</li>
+  </ul>
 
----
+  <hr>
 
-## 🏗 System Architecture
+  <h2>📦 Dependencies</h2>
+  <ul>
+    <li><strong>C++17 or later</strong> – Required for modern C++ features.</li>
+    <li><strong>httplib</strong> – Lightweight HTTP client for making API requests.
+      <ul>
+        <li><code>CPPHTTPLIB_OPENSSL_SUPPORT</code> enabled for HTTPS support.</li>
+      </ul>
+    </li>
+    <li><strong>OpenSSL</strong> – Required for secure HTTPS connections with <code>httplib</code>.</li>
+    <li><strong>nlohmann::json</strong> – Easy-to-use JSON library for parsing API responses.</li>
+    <li><strong>Dear ImGui</strong> – Fast and modern GUI framework for rendering the interface.</li>
+    <li><strong>DirectX 11</strong> – Used for rendering the UI on Windows (<code>imgui_impl_dx11.h</code>).</li>
+    <li><strong>Win32 API</strong> – Required for window management (<code>imgui_impl_win32.h</code>).</li>
+    <li><strong>Multi-threading Support</strong> – Uses <code>std::thread</code>, <code>std::mutex</code>, and <code>std::condition_variable</code>.</li>
+  </ul>
 
-The application follows a structured multi-threaded approach:
+  <hr>
 
-### 1. Download Thread (Data Retrieval)
-**Purpose:** Fetches JSON data asynchronously from the Open Library API.
+<h2>📚 How to Build & Run</h2>
 
- 🔄 How It Works:
-- Waits for a download request.
-- Extracts the host and path from the URL.
-- Sends an HTTP GET request using `httplib::Client`.
-- Processes the response:
-  - **If successful (200 OK)** → Stores raw JSON data.
-  - **If failed** → Logs an error message.
-- Signals the parsing thread that new data is available.
+<h3>1. Clone the Repository</h3>
+<p>To get started, clone the repository and navigate into the project directory:</p>
+<pre><code>git clone https://github.com/saeed-asle/bookApp.git
+cd bookApp</code></pre>
 
-<p align="center">
-  <img src="Captures/4.png" width="95%" />
-</p>
+<h3>2. Using Visual Studio (Recommended)</h3>
 
-### 2. Parse Thread (JSON Processing)
-**Purpose:** Extracts meaningful information from JSON responses and structures them for UI presentation.
+<ul>
+  <li><strong><p>Opening the Project</p></strong>
+    <ul>
+      <li>Open <strong>CppApp.sln</strong> in <strong>Visual Studio</strong>.</li>
+      <li>Locate <strong>Solution Explorer</strong> (<code>Ctrl + Alt + L</code> if not visible).</li>
+    </ul>
+  </li>
+<p></p>
+  <li><strong><p>Set <code>ConnectedApp</code> as the Main Project</p></strong>
+    <ul>
+      <li>To ensure the correct project runs:</li>
+      <ul>
+        <li>Right-click on <strong>ConnectedApp</strong> in Solution Explorer.</li>
+        <li>Select <strong>"Set as Startup Project"</strong> (it should appear <strong>bold</strong> once set).</li>
+      </ul>
+    </ul>
+  </li>
+<p></p>
 
-🔄 How It Works:
-- Waits for the `data_ready` signal from the download thread.
-- Validates the downloaded data.
-- Uses `nlohmann::json` to parse JSON.
-- Extracts relevant details based on `query_type` (e.g., books, authors, recent changes).
-- Handles missing/optional fields gracefully.
-- Stores structured data in shared memory (`CommonObjects`).
-- Notifies the UI thread that new data is available.
+  <li><strong><p>Build and Run</p></strong>
+    <ul>
+      <li>Choose a <strong>build configuration</strong>:
+        <ul>
+          <li><strong>Debug</strong> (for development with debugging features).</li>
+          <li><strong>Release</strong> (for optimized performance).</li>
+        </ul>
+      </li>
+      <li>Click <strong>Build → Build Solution (Ctrl + Shift + B)</strong>.</li>
+      <li>Run the application:
+        <ul>
+          <li>Press <strong>F5</strong> to start debugging.</li>
+          <li>Or select <strong>Debug → Start Debugging</strong>.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<p></p>
 
-### 3. UI Thread (Modern GUI Rendering)
-**Purpose:** Updates and manages the interactive graphical user interface (GUI).
+<h3>3. Using CMake (Alternative)</h3>
 
-🔄 How It Works:
-- Waits for the `json_ready` signal from the parse thread.
-- Dynamically updates UI components with the latest parsed data.
-- Implements interactive features such as:
-  - **Search input**
-  - **Result navigation**
-  - **Data visualization**
-- Allows users to initiate new searches, triggering another download cycle.
+<p>If you prefer CMake instead of Visual Studio, follow these steps:</p>
 
-<p align="center">
-  <img src="Captures/3.png" width="95%" />
-</p>
+<ul>
+  <li><strong><p>Prerequisites</p></strong>
+    <ul>
+      <li>Install <strong>CMake</strong>: <a href="https://cmake.org/download/">Download CMake</a></li>
+      <li>Install a <strong>C++ Compiler</strong>:
+        <ul>
+          <li><strong>Windows</strong>: Install <strong>MSVC</strong> (comes with Visual Studio) or <strong>MinGW-w64</strong>.</li>
+          <li><strong>Linux</strong>: Install <strong>GCC</strong> (<code>sudo apt install build-essential</code>).</li>
+          <li><strong>macOS</strong>: Install <strong>Clang</strong> (<code>xcode-select --install</code>).</li>
+        </ul>
+      </li>
+      <li><strong>(Windows users only)</strong> Install <strong>Ninja</strong> or use <code>cmake --build .</code> instead of <code>make</code>.</li>
+    </ul>
+  </li>
+<p></p>
 
----
+  <li><strong><p>Build & Run</p></strong>
+      <ul>
+   <li> <p>Run the following commands inside the project folder:</p></li>
+         </ul>
+      <ul>
+    <pre><code>mkdir build && cd build
+cmake ..
+cmake --build .
+./ConnectedApp  # Run the executable (Use "ConnectedApp.exe" on Windows)</code></pre>
+          </ul>
 
-## 🚀 Execution Flow (Main Loop)
-1. Initializes shared data structures (`CommonObjects`).
-2. Spawns and manages worker threads (`DownloadThread`, `ParseThread`, `DrawThread`).
-3. Waits for user input and signals appropriate threads.
-4. Handles application shutdown gracefully, ensuring safe thread termination.
+  </li>
 
----
+<li><strong>Ensure <code>ConnectedApp</code> is the Default Target</strong>
+  <ul>
+    <li><p>Check that <code>CMakeLists.txt</code> sets <code>ConnectedApp</code> as the executable:</p></li>
+  </ul>
+    <ul>
 
-## 🎨 Modern UI Design
+  <pre><code>add_executable(ConnectedApp main.cpp)
+set_target_properties(ConnectedApp PROPERTIES OUTPUT_NAME "ConnectedApp")</code></pre>
+  </ul>
 
-This application features a sleek **Dear ImGui** interface, styled with a variety of elements, including:
+</li>
+</ul>
+<hr>
 
-- **Smooth Rounded Corners** → `WindowRounding`, `FrameRounding`
-- **Dark Backgrounds & Highlights** → `ImGuiCol_WindowBg`, `ImGuiCol_ButtonHovered`, `ImGuiCol_ButtonActive`
-- **Consistent Spacing & Padding** → `ItemSpacing`, `FramePadding`
-- **Custom Loading Animations** → Circular progress indicators using `ImDrawList`
-- **Error Alerts** → Themed warning boxes for clear debugging feedback
+<h2 style="text-align: center; color: #333; font-family: 'Arial', sans-serif;">⚡ Author</h2>
 
-👉 the main UI styling is applied through `ApplyModernTheme` and `ApplyModernTheme1` inside `DrawAppWindow`.
+<div style="text-align: center;">
+  <img src="https://avatars.githubusercontent.com/saeed-asle" alt="Saeed Asle" style="border-radius: 50%; margin-right: 20px; width: 50px; height: 50px; margin-left: 15px;">
+  <div>
+    <a href="https://www.linkedin.com/in/saidasla/" target="_blank" style="color: #0077b5; text-decoration: none; font-weight: bold;">
+      🔗 LinkedIn
+    </a>
+  </div>
+</div>
 
----
+<hr>
 
-## 🛠 Core Technologies
+  <h2>📜 License</h2>
+  <p>MIT License - Feel free to use and modify!</p>
 
-- **C++17/20** → Efficient multi-threading & modern programming paradigms
-- **Open Library API** → Reliable book database for fetching book & author details
-- **httplib** → Lightweight, dependency-free HTTP client
-- **nlohmann::json** → Easy-to-use JSON parser
-- **Dear ImGui** → Fast & modern GUI framework
-- **std::thread, std::mutex, std::condition_variable** → Robust multi-threading
+  <hr>
 
----
+  <p align="center">
+    <img src="Captures/1 (4).png" width="100%" />
+  </p>
+    <hr>
+<hr>
 
-## 📦 Dependencies
-
-- **C++17 or later** – Required for modern C++ features.  
-- **httplib** – Lightweight HTTP client for making API requests.  
-  - `CPPHTTPLIB_OPENSSL_SUPPORT` enabled for HTTPS support.  
-- **OpenSSL** – Required for secure HTTPS connections with `httplib`.  
-- **nlohmann::json** – Easy-to-use JSON library for parsing API responses.  
-- **Dear ImGui** – Fast and modern GUI framework for rendering the interface.  
-- **DirectX 11** – Used for rendering the UI on Windows (`imgui_impl_dx11.h`).  
-- **Win32 API** – Required for window management (`imgui_impl_win32.h`).  
-- **Multi-threading Support** – Uses `std::thread`, `std::mutex`, and `std::condition_variable`.  
-
----
-
-## 📚 How to Build & Run
-
-### 1. Clone the Repository
-
-To get started, clone the repository and navigate into the project directory:
-
-```sh
-  git clone https://github.com/saeed-asle/bookApp.git
-  cd bookApp
-```
-
-
-### 2. Using Visual Studio (Recommended)
-
-- **Opening the Project**
-  - Open **CppApp.sln** in **Visual Studio**.
-  - Locate **Solution Explorer** (`Ctrl + Alt + L` if not visible).
-
-- **Set `ConnectedApp` as the Main Project**
-  - To ensure the correct project runs:
-    - Right-click on **ConnectedApp** in Solution Explorer.
-    - Select **"Set as Startup Project"** (it should appear **bold** once set).
-
-- **Build and Run**
-  - Choose a **build configuration**:
-    - **Debug** (for development with debugging features).
-    - **Release** (for optimized performance).
-  - Click **Build** → **Build Solution (Ctrl + Shift + B)**.
-  - Run the application:
-    - Press **F5** to start debugging.
-    - Or select **Debug → Start Debugging**.
-
-### 3. Using CMake (Alternative)
-
-If you prefer CMake instead of Visual Studio, follow these steps:
-
-- **Prerequisites**
-  - Install **CMake**: [Download CMake](https://cmake.org/download/)
-  - Install a **C++ Compiler**:
-    - **Windows**: Install **MSVC** (comes with Visual Studio) or **MinGW-w64**.
-    - **Linux**: Install **GCC** (`sudo apt install build-essential`).
-    - **macOS**: Install **Clang** (`xcode-select --install`).
-  - **(Windows users only)** Install **Ninja** or use `cmake --build .` instead of `make`.
-
-- **Build & Run**
-  - Run the following commands inside the project folder:
-
-    ```sh
-      mkdir build && cd build
-      cmake ..
-      cmake --build .
-      ./ConnectedApp  # Run the executable (Use "ConnectedApp.exe" on Windows)
-    ```
-
-- **Ensure `ConnectedApp` is the Default Target**
-  - Check that `CMakeLists.txt` sets `ConnectedApp` as the executable:
-
-    ```cmake
-      add_executable(ConnectedApp main.cpp)
-      set_target_properties(ConnectedApp PROPERTIES OUTPUT_NAME "ConnectedApp")
-    ```
-    
----
-
-## ⚡ Author
-  &nbsp;&nbsp;&nbsp;**Saeed Asle**  
-  > &nbsp;&nbsp;*[🔗LinkedIn](https://www.linkedin.com/in/saidasla/)*
-
----
-
-## 📜 License
-
-MIT License - Feel free to use and modify!
-
----
-
-
-<p align="center">
-  <img src="Captures/1 (4).png" width="100%" />
-</p>
-
----
+</body>
+</html>
