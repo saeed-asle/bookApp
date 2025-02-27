@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+
 <body>
   <h1>📚 Modern Book Manager</h1>
   
@@ -219,25 +216,23 @@ cmake --build .
   <ul>
     <li><p>Check that <code>CMakeLists.txt</code> sets <code>ConnectedApp</code> as the executable:</p></li>
   </ul>
-    <ul>
-
-  <pre><code>add_executable(ConnectedApp main.cpp)
+<ul>
+        <pre><code>add_executable(ConnectedApp main.cpp)
 set_target_properties(ConnectedApp PROPERTIES OUTPUT_NAME "ConnectedApp")</code></pre>
-  </ul>
+</ul>
 
 </li>
 </ul>
 <hr>
 
-<h2 style="text-align: center; color: #333; font-family: 'Arial', sans-serif;">⚡ Author</h2>
+<h2 >⚡ Author</h2>
 
-<div style="text-align: center;">
-  <img src="https://avatars.githubusercontent.com/saeed-asle" alt="Saeed Asle" style="border-radius: 50%; margin-right: 20px; width: 50px; height: 50px; margin-left: 15px;">
-  <div>
-    <a href="https://www.linkedin.com/in/saidasla/" target="_blank" style="color: #0077b5; text-decoration: none; font-weight: bold;">
+<div align="center">
+  <img src="https://avatars.githubusercontent.com/saeed-asle" alt="Saeed Asle" width="100" height="100" style="border-radius: 50%;">
+  <br>
+      <a href="https://www.linkedin.com/in/saidasla/" target="_blank" style="color: #0077b5; text-decoration: none; font-weight: bold;">
       🔗 LinkedIn
     </a>
-  </div>
 </div>
 
 <hr>
