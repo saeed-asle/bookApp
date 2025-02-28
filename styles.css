@@ -1,31 +1,6 @@
-body {
-  max-height: 100vh;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  padding: 20px;
-  position: relative;
-}
-
-.scroll-btn {
-  position: fixed;
-  right: 20px;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 20px;
-  border-radius: 5px;
-}
-
-#scrollUp {
-  bottom: 80px;
-}
-
-#scrollDown {
-  bottom: 20px;
-}
-
-.scroll-btn:hover {
-  background: black;
-}
+var { 
+  OverlayScrollbars, 
+  ScrollbarsHidingPlugin, 
+  SizeObserverPlugin, 
+  ClickScrollPlugin  
+} = OverlayScrollbarsGlobal;
