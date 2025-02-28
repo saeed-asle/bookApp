@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="styles.css">
+  <link type="text/css" href="styles.css" rel="stylesheet" />
+<script type="text/javascript" src="path/to/overlayscrollbars.browser.es.js" defer></script>
 </head>
 <body>
   <h1>📚 Modern Book Manager</h1>
