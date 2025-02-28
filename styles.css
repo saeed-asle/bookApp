@@ -1,6 +1,0 @@
-var { 
-  OverlayScrollbars, 
-  ScrollbarsHidingPlugin, 
-  SizeObserverPlugin, 
-  ClickScrollPlugin  
-} = OverlayScrollbarsGlobal;
