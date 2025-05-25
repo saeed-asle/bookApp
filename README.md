@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <h1>📚 Modern Book Manager</h1>
+  <h1>Modern Book Manager</h1>
   
   <p align="center">
     <img src="Captures/1.png" width="100%" />
@@ -14,19 +14,19 @@
   
   <hr>
   
-  <h2>📖 Overview</h2>
+  <h2>Overview</h2>
   <p>A modern, multi-threaded C++ application that fetches book data from the <a href="https://openlibrary.org/developers/api">Open Library API</a>, processes it, and dynamically updates a sleek graphical user interface (GUI). Designed for efficiency and responsiveness, this app ensures smooth real-time data retrieval, parsing, and display.</p>
   
   <hr>
   
-  <h2>🏗 System Architecture</h2>
+  <h2>System Architecture</h2>
   
   <p>The application follows a structured multi-threaded approach:</p>
   
   <h3>1. Download Thread (Data Retrieval)</h3>
   <p><strong>Purpose:</strong> Fetches JSON data asynchronously from the Open Library API.</p>
   
-  <p><strong>🔄 How It Works:</strong></p>
+  <p><strong>How It Works:</strong></p>
   <ul>
     <li>Waits for a download request.</li>
     <li>Extracts the host and path from the URL.</li>
@@ -47,7 +47,7 @@
   <h3>2. Parse Thread (JSON Processing)</h3>
   <p><strong>Purpose:</strong> Extracts meaningful information from JSON responses and structures them for UI presentation.</p>
   
-  <p><strong>🔄 How It Works:</strong></p>
+  <p><strong>How It Works:</strong></p>
   <ul>
     <li>Waits for the <code>data_ready</code> signal from the download thread.</li>
     <li>Validates the downloaded data.</li>
@@ -61,7 +61,7 @@
   <h3>3. UI Thread (Modern GUI Rendering)</h3>
   <p><strong>Purpose:</strong> Updates and manages the interactive graphical user interface (GUI).</p>
   
-  <p><strong>🔄 How It Works:</strong></p>
+  <p><strong>How It Works:</strong></p>
   <ul>
     <li>Waits for the <code>json_ready</code> signal from the parse thread.</li>
     <li>Dynamically updates UI components with the latest parsed data.</li>
@@ -81,7 +81,7 @@
   
   <hr>
   
-  <h2>🚀 Execution Flow (Main Loop)</h2>
+  <h2>Execution Flow (Main Loop)</h2>
   <ul>
     <li>Initializes shared data structures (<code>CommonObjects</code>).</li>
     <li>Spawns and manages worker threads (<code>DownloadThread</code>, <code>ParseThread</code>, <code>DrawThread</code>).</li>
@@ -89,7 +89,7 @@
     <li>Handles application shutdown gracefully, ensuring safe thread termination.</li>
   </ul>
     <hr>
-    <h1>🎨 Modern UI Design</h1>
+    <h1>Modern UI Design</h1>
 
   <p>This application features a sleek <strong>Dear ImGui</strong> interface, styled with a variety of elements, including:</p>
   
@@ -105,7 +105,7 @@
 
   <hr>
 
-  <h2>🛠 Core Technologies</h2>
+  <h2>Core Technologies</h2>
   <ul>
     <li><strong>C++17/20</strong> → Efficient multi-threading & modern programming paradigms</li>
     <li><strong>Open Library API</strong> → Reliable book database for fetching book & author details</li>
@@ -117,7 +117,7 @@
 
   <hr>
 
-  <h2>📦 Dependencies</h2>
+  <h2>Dependencies</h2>
   <ul>
     <li><strong>C++17 or later</strong> – Required for modern C++ features.</li>
     <li><strong>httplib</strong> – Lightweight HTTP client for making API requests.
@@ -135,7 +135,7 @@
 
   <hr>
 
-<h2>📚 How to Build & Run</h2>
+<h2>How to Build & Run</h2>
 
 <h3>1. Clone the Repository</h3>
 <p>To get started, clone the repository and navigate into the project directory:</p>
@@ -151,7 +151,6 @@ cd bookApp</code></pre>
       <li>Locate <strong>Solution Explorer</strong> (<code>Ctrl + Alt + L</code> if not visible).</li>
     </ul>
   </li>
-<p></p>
   <li><strong><p>Set <code>ConnectedApp</code> as the Main Project</p></strong>
     <ul>
       <li>To ensure the correct project runs:</li>
@@ -161,8 +160,6 @@ cd bookApp</code></pre>
       </ul>
     </ul>
   </li>
-<p></p>
-
   <li><strong><p>Build and Run</p></strong>
     <ul>
       <li>Choose a <strong>build configuration</strong>:
@@ -181,55 +178,17 @@ cd bookApp</code></pre>
     </ul>
   </li>
 </ul>
-<p></p>
 
-<h3>3. Using CMake (Alternative)</h3>
+<h3>3. CMake Build (Not Currently Supported)</h3>
 
-<p>If you prefer CMake instead of Visual Studio, follow these steps:</p>
+<p>This project is currently configured to build with Visual Studio only. There is no <code>CMakeLists.txt</code> file included at this time.</p>
+<p>If you want to build using CMake, you will need to add support manually.</p>
 
-<ul>
-  <li><strong><p>Prerequisites</p></strong>
-    <ul>
-      <li>Install <strong>CMake</strong>: <a href="https://cmake.org/download/">Download CMake</a></li>
-      <li>Install a <strong>C++ Compiler</strong>:
-        <ul>
-          <li><strong>Windows</strong>: Install <strong>MSVC</strong> (comes with Visual Studio) or <strong>MinGW-w64</strong>.</li>
-          <li><strong>Linux</strong>: Install <strong>GCC</strong> (<code>sudo apt install build-essential</code>).</li>
-          <li><strong>macOS</strong>: Install <strong>Clang</strong> (<code>xcode-select --install</code>).</li>
-        </ul>
-      </li>
-      <li><strong>(Windows users only)</strong> Install <strong>Ninja</strong> or use <code>cmake --build .</code> instead of <code>make</code>.</li>
-    </ul>
-  </li>
-<p></p>
 
-  <li><strong><p>Build & Run</p></strong>
-      <ul>
-   <li> <p>Run the following commands inside the project folder:</p></li>
-         </ul>
-      <ul>
-    <pre><code>mkdir build && cd build
-cmake ..
-cmake --build .
-./ConnectedApp  # Run the executable (Use "ConnectedApp.exe" on Windows)</code></pre>
-          </ul>
-
-  </li>
-
-<li><strong>Ensure <code>ConnectedApp</code> is the Default Target</strong>
-  <ul>
-    <li><p>Check that <code>CMakeLists.txt</code> sets <code>ConnectedApp</code> as the executable:</p></li>
-  </ul>
-<ul>
-        <pre><code>add_executable(ConnectedApp main.cpp)
-set_target_properties(ConnectedApp PROPERTIES OUTPUT_NAME "ConnectedApp")</code></pre>
-</ul>
-
-</li>
-</ul>
 <hr>
 
-<h2 >⚡ Author</h2>
+
+<h2 >Author</h2>
 
 <div align="center">
   <img src="https://avatars.githubusercontent.com/saeed-asle" alt="Saeed Asle" width="100" height="100" style="border-radius: 50%;">
@@ -241,7 +200,7 @@ set_target_properties(ConnectedApp PROPERTIES OUTPUT_NAME "ConnectedApp")</code>
 
 <hr>
 
-  <h2>📜 License</h2>
+  <h2>License</h2>
   <p>MIT License - Feel free to use and modify!</p>
 
   <hr>
